@@ -33,7 +33,7 @@ function displayWorks(elem) {
 
 getdata();
 
-// 1) ***********************FONCTION RECUPERATIONS DES CATEGS
+// 1) ***********************FONCTION RECUPERATIONS DES CATEGORIES ############
 
 async function getcategories() {
   const url = "http://localhost:5678/api/categories";
@@ -57,33 +57,75 @@ getcategories();
 
 // 2) ****************** fonctions creations des boutons et attacher ecouteurs (lancement fonction de tri en dessous)
 
-// Créer un bouton
 const button = document.createElement("button");
 const buutton = document.createElement("button");
 const buuutton = document.createElement("button");
 const buuuutton = document.createElement("button");
 
-// Définir le texte du bouton
+// Définir le texte des boutons
 button.textContent = "Tous";
 buutton.textContent = "Objets";
 buuutton.textContent = "Appartements";
-buuuutton.textContent = "Hotels&Restaurants";
+buuuutton.textContent = "Hôtels & Restaurants";
+
+//############# AJOUT DATTRIBUTS DATA-CAT ####################
+button.setAttribute("data-cat", "0");
+buutton.setAttribute("data-cat", "objetsId");
+buuutton.setAttribute("data-cat", "AppartsId");
+buuuutton.setAttribute("data-cat", "HotelsRestaurantsId");
 
 // Ajouter un écouteur d'événements pour le clic
 button.addEventListener("click", function () {
-  alert("Bouton cliqué avec addEventListener !");
+  trier("Tous");
+});
+buutton.addEventListener("click", function () {
+  trier("Objets");
+});
+buuutton.addEventListener("click", function () {
+  trier("Appartements");
+});
+buuuutton.addEventListener("click", function () {
+  trier("Hôtels et restaurants");
 });
 
-// Ajouter le bouton au conteneur dans le HTML
+//########## Ajouter les boutons au conteneur dans le HTML##################
 document.getElementById("boutton").appendChild(button);
 document.getElementById("boutton").appendChild(buutton);
 document.getElementById("boutton").appendChild(buuutton);
 document.getElementById("boutton").appendChild(buuuutton);
 
-//3)****************** fonction de trie (boucle for)
-
-[
-  { id: 1, name: "Objets" },
-  { id: 2, name: "Appartements" },
-  { id: 3, name: "Hôtels et restaurants" },
+// Données à trier #######################
+const items = [
+  { id: 1, name: "Objet 1", type: "Objets" },
+  { id: 2, name: "Appartement 1", type: "Appartements" },
+  { id: 3, name: "Restaurant 1", type: "Hôtels et restaurants" },
+  { id: 4, name: "Objet 2", type: "Objets" },
+  { id: 5, name: "Appartement 2", type: "Appartements" },
 ];
+
+// Fonction de tri ####################
+function trier(type) {
+  const messageDiv = document.getElementById("message");
+
+  let filteredItems = []; // Créer un tableau vide
+
+  let index = 0; // Compteur pour le tableau filtré
+
+  for (let i = 0; i < items.length; i++) {
+    if (type === "Tous" || items[i].type === type) {
+      filteredItems[index] = items[i]; // Assignation directe
+      index++; // Incrémenter le compteur
+    }
+  }
+
+  // Afficher les éléments triés  #########################
+  if (index > 0) {
+    messageDiv.textContent = `Éléments trouvés pour ${type} : ${filteredItems
+      .slice(0, index)
+      .map((item) => item.name)
+      .join(", ")}`;
+  } else {
+    messageDiv.textContent = `Aucun élément trouvé pour : ${type}.`;
+  }
+}
+trier();
