@@ -63,6 +63,15 @@ function filterWorks(categoryId) {
   });
 }
 
+// Gestion du clic sur le lien Login
+document
+  .getElementById("loginLink")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    console.log("Login link clicked"); // Vérification
+    window.location.href = "login.html"; // Redirection vers la page de connexion
+  });
+
 // Appels des fonctions
 getData();
 getCategories();

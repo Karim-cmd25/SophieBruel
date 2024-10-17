@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sophie Bluel - Connexion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/style.css" />
+    <script type="module" src="login.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+      <!-- Titre principal -->
+    </header>
+    <main>
+      <section id="login">
+        <h2>Log In</h2>
+        <form id="workForm">
+          <label for="email">E-mail :</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="password">Mot de passe :</label>
+          <input type="password" id="password" name="password" required />
+
+          <button type="submit" class="btn-login">Se connecter</button>
+          <div id="loading" style="display: none">Chargement...</div>
+          <div id="error-message" style="color: red; display: none"></div>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <nav>
+        <ul>
+          <li><a href="mentions-legales.html">Mentions Légales</a></li>
+          <!-- Lien vers les mentions légales -->
+        </ul>
+      </nav>
+    </footer>
+  </body>
+</html>
