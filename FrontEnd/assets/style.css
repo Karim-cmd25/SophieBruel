@@ -317,53 +317,56 @@ nav a {
   text-decoration: none;
 }
 
-#myModal {
+.modal {
+  display: none; /* Cachée par défaut */
+  position: fixed;
+  z-index: 1000; /* Au-dessus des autres éléments */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Permet le défilement si nécessaire */
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+}
+
+.modal-content {
+  background-color: white; /* Fond blanc pour la modale */
+  margin: 15% auto; /* Positionnement vertical */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Largeur de la modale */
+}
+
+#edition {
   background-color: black;
-  width: 100%;
-  margin-left: 0px;
-  margin-right: 0px;
+  color: white;
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  height: 59px;
-  width: 100%;
-  display: non;
+  gap: 10px;
+  height: 30px;
+  padding-top: 10px;
+}
+#edition h2 {
+  font-size: 12px;
+  color: white;
+}
+
+#editTitle {
+  display: flex;
+  justify-content: center;
 }
 
 .modifier {
   display: flex;
   justify-content: center;
   gap: 10px;
-  display: non;
 }
 
-.modifier button {
+#editButton {
   border: none;
-  display: ;
   color: black;
 }
 
 .crayon {
-  padding-top: 8px;
-}
-
-#myModal h2 {
-  display: flex;
-  justify-content: center;
-  font-size: 12px;
-  color: white;
-}
-
-.logoo {
-  color: white;
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  padding-right: 20px;
-}
-
-.modal-content {
-  display: flex;
-  flex-direction: row;
-  padding: 20px;
+  padding-top: 10px;
 }

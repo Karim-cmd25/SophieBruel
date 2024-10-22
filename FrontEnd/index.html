@@ -10,7 +10,6 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
       rel="stylesheet"
@@ -19,29 +18,25 @@
     <script type="module" src="./assets/js/index.js" defer></script>
   </head>
   <body>
-    <!-- Bouton pour ouvrir la modal -->
-
-    <!-- La Modal -->
-    <div id="myModal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <div class="logoo"><i class="fa-regular fa-pen-to-square"></i></div>
-        <h2>mode édition</h2>
-      </div>
+    <div id="edition">
+      <div class="logoo"><i class="fa-regular fa-pen-to-square"></i></div>
+      <h2>mode édition</h2>
     </div>
+
     <header>
+      <!-- La Modal -->
+
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
         <ul>
           <li>projets</li>
           <li>contact</li>
-
           <li><a href="./login.html">Login</a></li>
-
           <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
         </ul>
       </nav>
     </header>
+
     <main>
       <section id="introduction">
         <figure>
@@ -67,10 +62,28 @@
         </article>
       </section>
 
-      <div class="modifier">
-        <h2 class="titre">Mes Projets</h2>
+      <div class="modifier" style="display: none">
+        <h2 id="editTitle">Mes Projets</h2>
         <div class="crayon"><i class="fa-regular fa-pen-to-square"></i></div>
-        <button>modifier</button>
+        <button id="editButton">Modifier</button>
+      </div>
+
+      <div id="myModal" class="modal" style="display: none">
+        <div class="modal-content">
+          <span class="close" id="closeModal">&times;</span>
+          <h2>Galerie photo</h2>
+          <p>AJOUTER LES PHOTOS ET LA POUBELLE...</p>
+        </div>
+      </div>
+
+      <div id="deleteModal" class="modal" style="display: none">
+        <div class="modal-content">
+          <span class="close" id="closeDeleteModal">&times;</span>
+          <h2>Confirmer la Suppression</h2>
+          <p>Êtes-vous sûr de vouloir supprimer cette photo ?</p>
+          <button id="confirmDelete">Supprimer</button>
+          <button id="cancelDelete">Annuler</button>
+        </div>
       </div>
 
       <section id="portfolio">
@@ -78,6 +91,7 @@
         <div id="message"></div>
         <div id="gallery" class="gallery"></div>
       </section>
+
       <section id="contact">
         <h2>Contact</h2>
         <p>Vous avez un projet ? Discutons-en !</p>
@@ -92,6 +106,7 @@
         </form>
       </section>
     </main>
+
     <footer>
       <nav>
         <ul>

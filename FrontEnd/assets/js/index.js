@@ -40,12 +40,12 @@ function displayCategoriesButtons(categories) {
   // Bouton "Tous"
   const allButton = document.createElement("button");
   allButton.textContent = "Tous";
-  allButton.addEventListener("click", () => filterWorks(0)); // 0 pour tous
+  allButton.addEventListener("click", () => filterWorks(0));
   buttonContainer.appendChild(allButton);
 
   categories.forEach((category) => {
     const button = document.createElement("button");
-    button.textContent = category.name; // Assurez-vous que 'name' est correct
+    button.textContent = category.name;
     button.setAttribute("data-cat", category.id);
     button.addEventListener("click", () => filterWorks(category.id));
     buttonContainer.appendChild(button);
@@ -56,37 +56,76 @@ function filterWorks(categoryId) {
   const galleryItems = document.querySelectorAll(".gallery-item");
   galleryItems.forEach((item) => {
     if (categoryId === 0 || item.getAttribute("data-cat") == categoryId) {
-      item.style.display = "block"; // Afficher l'élément
+      item.style.display = "block";
     } else {
-      item.style.display = "none"; // Cacher l'élément
+      item.style.display = "none";
     }
   });
 }
-getData();
-getCategories();
 
-//fonction pour ajouter un ecouteurs evenements sur le boutons pour declencher la fonction modal (display modal) ####
-function GoModal() {
-  GoModal.addEventListener("click");
-}
-
-// Appels des fonctions
-
-function isAuthenticated() {
-  const token = localStorage.getItem("token");
-  const editModeElement = document.getElementById("editMode");
-  const displayModeElement = document.getElementById("displayMode");
-  if (token) {
-    // Affiche le mode édition et le bouton "Modifier" si le token existe
-    editModeElement.style.display = "block";
-    displayModeElement.style.display = "none"; // Masque le mode affichage
-  } else {
-    // Masque le mode édition et le bouton "Modifier" si le token n'existe pas
-    editModeElement.style.display = "none";
-    displayModeElement.style.display = "block"; // Affiche le mode affichage
-  }
-}
-isAuthenticated();
 document.addEventListener("DOMContentLoaded", function () {
+  const deleteModal = document.getElementById("deleteModal");
+  const closeDeleteModal = document.getElementById("closeDeleteModal");
+  const confirmDelete = document.getElementById("confirmDelete");
+  const cancelDelete = document.getElementById("cancelDelete");
+  const editButton = document.getElementById("editButton");
+  const modifierSection = document.querySelector(".modifier");
+  const myModal = document.getElementById("myModal");
+  const closeModal = document.getElementById("closeModal");
+
+  function isAuthenticated() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      modifierSection.style.display = "flex";
+    } else {
+      modifierSection.style.display = "none";
+    }
+  }
+
+  function openModal() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      myModal.style.display = "block";
+    } else {
+      alert("Veuillez vous connecter pour modifier.");
+    }
+  }
+
   isAuthenticated();
+
+  if (editButton) {
+    editButton.addEventListener("click", openModal);
+  }
+
+  closeModal.onclick = function () {
+    myModal.style.display = "none";
+  };
+
+  window.onclick = function (event) {
+    if (event.target === myModal) {
+      myModal.style.display = "none";
+    }
+  };
+
+  closeDeleteModal.onclick = function () {
+    deleteModal.style.display = "none";
+  };
+
+  window.onclick = function (event) {
+    if (event.target === deleteModal) {
+      deleteModal.style.display = "none";
+    }
+  };
+
+  confirmDelete.addEventListener("click", function () {
+    console.log("Photo supprimée");
+    deleteModal.style.display = "none";
+  });
+
+  cancelDelete.addEventListener("click", function () {
+    deleteModal.style.display = "none";
+  });
+
+  getData();
+  getCategories();
 });
