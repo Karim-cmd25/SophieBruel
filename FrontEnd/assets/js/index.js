@@ -62,16 +62,31 @@ function filterWorks(categoryId) {
     }
   });
 }
-
-// Gestion du clic sur le lien Login
-document
-  .getElementById("loginLink")
-  .addEventListener("click", function (event) {
-    event.preventDefault();
-    console.log("Login link clicked"); // Vérification
-    window.location.href = "login.html"; // Redirection vers la page de connexion
-  });
-
-// Appels des fonctions
 getData();
 getCategories();
+
+//fonction pour ajouter un ecouteurs evenements sur le boutons pour declencher la fonction modal (display modal) ####
+function GoModal() {
+  GoModal.addEventListener("click");
+}
+
+// Appels des fonctions
+
+function isAuthenticated() {
+  const token = localStorage.getItem("token");
+  const editModeElement = document.getElementById("editMode");
+  const displayModeElement = document.getElementById("displayMode");
+  if (token) {
+    // Affiche le mode édition et le bouton "Modifier" si le token existe
+    editModeElement.style.display = "block";
+    displayModeElement.style.display = "none"; // Masque le mode affichage
+  } else {
+    // Masque le mode édition et le bouton "Modifier" si le token n'existe pas
+    editModeElement.style.display = "none";
+    displayModeElement.style.display = "block"; // Affiche le mode affichage
+  }
+}
+isAuthenticated();
+document.addEventListener("DOMContentLoaded", function () {
+  isAuthenticated();
+});

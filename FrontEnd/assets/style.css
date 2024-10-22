@@ -308,3 +308,62 @@ footer nav ul {
   justify-content: flex-end;
   margin: 2em;
 }
+.pcg a {
+  color: black;
+  text-decoration: none;
+}
+nav a {
+  color: black;
+  text-decoration: none;
+}
+
+#myModal {
+  background-color: black;
+  width: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 59px;
+  width: 100%;
+  display: non;
+}
+
+.modifier {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  display: non;
+}
+
+.modifier button {
+  border: none;
+  display: ;
+  color: black;
+}
+
+.crayon {
+  padding-top: 8px;
+}
+
+#myModal h2 {
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  color: white;
+}
+
+.logoo {
+  color: white;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  padding-right: 20px;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
