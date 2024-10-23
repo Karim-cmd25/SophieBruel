@@ -72,14 +72,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const modifierSection = document.querySelector(".modifier");
   const myModal = document.getElementById("myModal");
   const closeModal = document.getElementById("closeModal");
+  const editionDiv = document.getElementById("edition");
 
   function isAuthenticated() {
     const token = localStorage.getItem("token");
-    if (token) {
-      modifierSection.style.display = "flex";
-    } else {
-      modifierSection.style.display = "none";
-    }
+    modifierSection.style.display = token ? "flex" : "none";
   }
 
   function openModal() {
@@ -97,24 +94,23 @@ document.addEventListener("DOMContentLoaded", function () {
     editButton.addEventListener("click", openModal);
   }
 
+  if (editionDiv) {
+    editionDiv.addEventListener("click", openModal);
+  }
+
   closeModal.onclick = function () {
     myModal.style.display = "none";
   };
 
   window.onclick = function (event) {
-    if (event.target === myModal) {
+    if (event.target === myModal || event.target === deleteModal) {
       myModal.style.display = "none";
+      deleteModal.style.display = "none";
     }
   };
 
   closeDeleteModal.onclick = function () {
     deleteModal.style.display = "none";
-  };
-
-  window.onclick = function (event) {
-    if (event.target === deleteModal) {
-      deleteModal.style.display = "none";
-    }
   };
 
   confirmDelete.addEventListener("click", function () {

@@ -17,7 +17,7 @@ function showLoginForm() {
           </form>
           <p><a href="motdepasse-oublie.html">Mot de passe oublié </a></p>
       `;
-  //// new fonction getform ##############
+
   document
     .getElementById("workForm")
     .addEventListener("submit", async function (event) {
@@ -31,9 +31,9 @@ function showLoginForm() {
       console.log(data);
 
       const loadingIndicator = document.getElementById("loading");
-      loadingIndicator.style.display = "block"; // Affiche le chargement
+      loadingIndicator.style.display = "block";
       const errorMessage = document.getElementById("error-message");
-      errorMessage.style.display = "none"; // Cache les erreurs précédentes
+      errorMessage.style.display = "none";
 
       try {
         const response = await fetch("http://localhost:5678/api/users/login", {
@@ -49,16 +49,17 @@ function showLoginForm() {
         }
 
         const responseData = await response.json();
+        console.log("Données de réponse :", responseData);
         alert("Connexion réussie !");
-        console.log(responseData.token);
         localStorage.setItem("token", responseData.token);
+        console.log("Token stocké :", localStorage.getItem("token"));
 
-        window.location.href = "index.html"; // Ou homepage.html
+        window.location.href = "index.html";
       } catch (error) {
         errorMessage.textContent = error.message;
-        errorMessage.style.display = "block"; // Affiche l'erreur
+        errorMessage.style.display = "block";
       } finally {
-        loadingIndicator.style.display = "none"; // Cache le chargement
+        loadingIndicator.style.display = "none";
       }
     });
 }
