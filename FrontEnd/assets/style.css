@@ -337,10 +337,6 @@ nav a {
   width: 630px;
   height: 688px;
 }
-}
-
-
-
 
 #editTitle {
   display: flex;
@@ -370,8 +366,43 @@ nav a {
   gap: 10px;
   height: 30px;
   padding-top: 10px;
-  }
-  #edition h2 {
-    font-size: 12px;
-    color: white;
-  }
+}
+#edition h2 {
+  font-size: 12px;
+  color: white;
+}
+#addPhotoButton {
+  position: absolute;
+  bottom: 1px;
+
+  left: 43%;
+  background-color: #1d6154;
+  color: white;
+  width: 200px;
+  height: 40px;
+}
+.gal {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  height: 80vh; /* Ajustez selon vos besoins */
+}
+
+.modal-gallery {
+  flex: 1; /* Prend tout l'espace disponible */
+  overflow-y: auto; /* Ajoute un défilement si nécessaire */
+}
+
+#addPhotoButton {
+  margin-top: auto; /* Pousse le bouton en bas */
+}
+#myModal img {
+  width: 87px;
+  height: 130px;
+  display: fle;
+  padding: none;
+}

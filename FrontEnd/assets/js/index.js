@@ -5,6 +5,7 @@ async function getData() {
 
   data.forEach((elem) => {
     displayWorks(elem);
+    displayModalGallery(elem); // Vérifie le nom de la fonction ici
   });
 }
 
@@ -26,6 +27,24 @@ function displayWorks(elem) {
   gallery.appendChild(fig);
 }
 
+function displayModalGallery(elem) {
+  const modalGallery = document.getElementById("modalGallery"); // Assurez-vous que l'ID correspond à votre HTML
+  const fig = document.createElement("figure");
+  fig.setAttribute("class", "gallery-item");
+  fig.setAttribute("data-cat", elem.categoryId);
+
+  const img = document.createElement("img");
+  img.setAttribute("alt", elem.title);
+  img.setAttribute("src", elem.imageUrl);
+
+  const caption = document.createElement("figcaption");
+  caption.textContent = elem.title;
+
+  fig.appendChild(img);
+  fig.appendChild(caption);
+  modalGallery.appendChild(fig); // Ajouter à la galerie de la modal
+}
+
 async function getCategories() {
   const url = "http://localhost:5678/api/categories";
   const response = await fetch(url);
@@ -37,7 +56,6 @@ async function getCategories() {
 function displayCategoriesButtons(categories) {
   const buttonContainer = document.getElementById("boutton");
 
-  // Bouton "Tous"
   const allButton = document.createElement("button");
   allButton.textContent = "Tous";
   allButton.addEventListener("click", () => filterWorks(0));
