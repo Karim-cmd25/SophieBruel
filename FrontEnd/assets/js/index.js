@@ -1,14 +1,23 @@
-async function getData() {
-  const url = "http://localhost:5678/api/works";
-  const response = await fetch(url);
-  const data = await response.json();
+import { displayModalGallery } from "./modal.js"; // Assure-toi que le chemin est correct
 
-  data.forEach((elem) => {
-    displayWorks(elem);
-    displayModalGallery(elem); // Vérifie le nom de la fonction ici
-  });
+// Fonction pour récupérer les données des travaux
+async function getData() {
+  try {
+    const url = "http://localhost:5678/api/works";
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Erreur de réseau");
+    const data = await response.json();
+
+    data.forEach((elem) => {
+      displayWorks(elem);
+      displayModalGallery(elem); // Utilisation de la fonction importée
+    });
+  } catch (error) {
+    console.error("Erreur lors de la récupération des données :", error);
+  }
 }
 
+// Fonction pour afficher les travaux dans la galerie principale
 function displayWorks(elem) {
   const gallery = document.getElementById("gallery");
   const fig = document.createElement("figure");
@@ -27,32 +36,21 @@ function displayWorks(elem) {
   gallery.appendChild(fig);
 }
 
-function displayModalGallery(elem) {
-  const modalGallery = document.getElementById("modalGallery"); // Assurez-vous que l'ID correspond à votre HTML
-  const fig = document.createElement("figure");
-  fig.setAttribute("class", "gallery-item");
-  fig.setAttribute("data-cat", elem.categoryId);
-
-  const img = document.createElement("img");
-  img.setAttribute("alt", elem.title);
-  img.setAttribute("src", elem.imageUrl);
-
-  const caption = document.createElement("figcaption");
-  caption.textContent = elem.title;
-
-  fig.appendChild(img);
-  fig.appendChild(caption);
-  modalGallery.appendChild(fig); // Ajouter à la galerie de la modal
-}
-
+// Fonction pour récupérer les catégories
 async function getCategories() {
-  const url = "http://localhost:5678/api/categories";
-  const response = await fetch(url);
-  const categories = await response.json();
+  try {
+    const url = "http://localhost:5678/api/categories";
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Erreur de réseau");
+    const categories = await response.json();
 
-  displayCategoriesButtons(categories);
+    displayCategoriesButtons(categories);
+  } catch (error) {
+    console.error("Erreur lors de la récupération des catégories :", error);
+  }
 }
 
+// Fonction pour afficher les boutons de catégories
 function displayCategoriesButtons(categories) {
   const buttonContainer = document.getElementById("boutton");
 
@@ -70,6 +68,7 @@ function displayCategoriesButtons(categories) {
   });
 }
 
+// Fonction pour filtrer les travaux par catégorie
 function filterWorks(categoryId) {
   const galleryItems = document.querySelectorAll(".gallery-item");
   galleryItems.forEach((item) => {
@@ -81,6 +80,7 @@ function filterWorks(categoryId) {
   });
 }
 
+// Fonction principale exécutée lorsque le DOM est chargé
 document.addEventListener("DOMContentLoaded", function () {
   const deleteModal = document.getElementById("deleteModal");
   const closeDeleteModal = document.getElementById("closeDeleteModal");

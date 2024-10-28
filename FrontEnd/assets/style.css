@@ -406,3 +406,19 @@ nav a {
   display: fle;
   padding: none;
 }
+
+.trashIcon {
+  height: 40px !important;
+  width: 30px !important;
+  position: absolute;
+}
+
+.gallery-item {
+  position: relative; /* Permet de positionner l'icône par rapport à l'élément */
+}
+
+.tout {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
