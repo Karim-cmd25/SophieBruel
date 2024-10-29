@@ -390,7 +390,7 @@ nav a {
 .modal-content {
   display: flex;
   flex-direction: column;
-  height: 80vh; /* Ajustez selon vos besoins */
+  height: 670px; /* Ajustez selon vos besoins */
 }
 
 .modal-gallery {
@@ -418,10 +418,7 @@ nav a {
   height: 17px !important;
   width: 17px !important;
   right: 123px;
-
-
-
-
+}
 
 #addPhotoForm {
   display: flex;
@@ -452,9 +449,7 @@ nav a {
   color: white;
 }
 
-
 .tout {
-
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -478,3 +473,23 @@ nav a {
   font-size: 30px !important;
 }
 
+.carre {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+  height: 100px; /* Ajuste la hauteur si besoin */
+  width: 100%;
+  background-color: rgba(232, 241, 246, 1);
+  flex-direction: column;
+  padding: 20px;
+}
+
+.carre img {
+  width: 68px; /* Largeur de l'image */
+  height: 59px; /* Hauteur de l'image */
+}
+
+.carre button {
+  display: flex;
+  background-color: rgba(203, 214, 220, 1);
+}
