@@ -491,5 +491,7 @@ nav a {
 
 .carre button {
   display: flex;
-  background-color: rgba(203, 214, 220, 1);
+  background-color: lightgray;
+
+  margin: 10px;
 }
