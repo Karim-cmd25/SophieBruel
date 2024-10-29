@@ -23,6 +23,7 @@ function displayWorks(elem) {
   const fig = document.createElement("figure");
   fig.setAttribute("class", "gallery-item");
   fig.setAttribute("data-cat", elem.categoryId);
+  fig.setAttribute("id", `gal_${elem.id}`); // Ajout de l'ID
 
   const img = document.createElement("img");
   img.setAttribute("alt", elem.title);

@@ -384,6 +384,7 @@ nav a {
 .gal {
   display: flex;
   justify-content: center;
+  margin-bottom: 40px;
 }
 
 .modal-content {
@@ -401,24 +402,79 @@ nav a {
   margin-top: auto; /* Pousse le bouton en bas */
 }
 #myModal img {
-  width: 87px;
-  height: 130px;
+  width: 76px;
+  height: 102px;
   display: fle;
   padding: none;
-}
-
-.trashIcon {
-  height: 40px !important;
-  width: 30px !important;
-  position: absolute;
 }
 
 .gallery-item {
   position: relative; /* Permet de positionner l'icône par rapport à l'élément */
 }
 
-.tout {
+.trashIcon {
+  position: absolute;
+  top: 1px;
+  height: 17px !important;
+  width: 17px !important;
+  right: 123px;
+
+
+
+
+
+#addPhotoForm {
+  display: flex;
+  width: 420px;
+  justify-content: center;
+  flex-direction: column;
+  align-self: CENTER;
+}
+.ajout {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  margin-top: 20px;
 }
+
+#addPhotoForm label {
+  width: 420px;
+  height: 51px;
+  margin-top: 20px;
+}
+
+#addPhotoForm button {
+  width: 237px;
+  height: 36px;
+  margin-top: 20px;
+  align-self: center;
+  background-color: #a7a7a7;
+
+  color: white;
+}
+
+
+.tout {
+
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+#addPhotoForm input {
+  width: 420px;
+  height: 51px;
+  box-shadow: 0px 4px 14px 0px #00000017;
+}
+
+#closeModalAutre {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 30px;
+}
+
+#closeModal {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  font-size: 30px !important;
+}
+

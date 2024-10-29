@@ -1,8 +1,10 @@
+// Fonction pour afficher la galerie dans la modal existante
 export function displayModalGallery(elem) {
   const modalGallery = document.getElementById("modalGallery");
   const fig = document.createElement("figure");
   fig.setAttribute("class", "gallery-item");
   fig.setAttribute("data-cat", elem.categoryId);
+  fig.setAttribute("id", `mod_${elem.id}`); // Ajout de l'ID
 
   const img = document.createElement("img");
   img.setAttribute("alt", elem.title);
@@ -21,11 +23,11 @@ export function displayModalGallery(elem) {
 
   fig.appendChild(img);
   fig.appendChild(caption);
-  fig.appendChild(icon); // Ajoute l'icône à la figure
+  fig.appendChild(icon);
   modalGallery.appendChild(fig);
 }
 
-// Ajoute ici les autres fonctions comme deleteWorks et deleteItem si nécessaire.
+// Fonction pour supprimer un travail
 async function deleteWorks(id) {
   const url = `http://localhost:5678/api/works/${id}`;
   if (!localStorage.getItem("token")) {
@@ -46,8 +48,40 @@ async function deleteWorks(id) {
 }
 
 function deleteItem(id) {
-  document.getElementById(`mod_${id}`).remove();
-  document.getElementById(`gal_${id}`).remove();
+  const modalItem = document.getElementById(`mod_${id}`);
+  const galleryItem = document.getElementById(`gal_${id}`);
+
+  if (modalItem) modalItem.remove();
+  if (galleryItem) galleryItem.remove();
 }
 
 // ############### M  O  D  A  L    2 ###########
+export function displayModalAutre() {
+  const modalAutre = document.getElementById("modalAutre");
+  modalAutre.style.display = "block"; // Affiche la modal
+
+  const closeModalAutre = document.getElementById("closeModalAutre");
+  closeModalAutre.onclick = function () {
+    modalAutre.style.display = "none"; // Ferme la modal
+  };
+
+  window.onclick = function (event) {
+    if (event.target === modalAutre) {
+      modalAutre.style.display = "none"; // Ferme la modal si clic en dehors
+    }
+  };
+}
+
+// Fonction pour gérer le clic sur le bouton "ADDPHOTOBUTTON"
+export function setupAddPhotoButton() {
+  const addPhotoButton = document.getElementById("addPhotoButton");
+  if (addPhotoButton) {
+    addPhotoButton.addEventListener("click", displayModalAutre); // Ouvre la deuxième modal
+  }
+}
+
+// Appelle cette fonction après le chargement du DOM
+document.addEventListener("DOMContentLoaded", function () {
+  setupAddPhotoButton();
+  // Autres initialisations si nécessaires
+});
