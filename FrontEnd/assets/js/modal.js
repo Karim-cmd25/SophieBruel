@@ -1,22 +1,26 @@
-// Fonction pour afficher la galerie dans la modal existante
+// VARIABLES MODALES
+const modalGallery = document.getElementById("modalGallery");
+const modalAutre = document.getElementById("modalAutre");
+const closeModalAutre = document.getElementById("closeModalAutre");
+const addPhotoButton = document.getElementById("addPhotoButton");
+
+// FONCTION POUR AFFICHER LA GALERIE DANS LA MODAL
 export function displayModalGallery(elem) {
-  const modalGallery = document.getElementById("modalGallery");
   const fig = document.createElement("figure");
-  fig.setAttribute("class", "gallery-item");
+  fig.classList.add("gallery-item");
   fig.setAttribute("data-cat", elem.categoryId);
-  fig.setAttribute("id", `mod_${elem.id}`); // Ajout de l'ID
+  fig.id = `mod_${elem.id}`;
 
   const img = document.createElement("img");
-  img.setAttribute("alt", elem.title);
-  img.setAttribute("src", elem.imageUrl);
+  img.alt = elem.title;
+  img.src = elem.imageUrl;
 
   const caption = document.createElement("figcaption");
   caption.textContent = elem.title;
 
-  // Ajout de l'icône de la poubelle
   const icon = document.createElement("img");
-  icon.setAttribute("src", "assets/icons/trash.jpg");
-  icon.setAttribute("class", "trashIcon");
+  icon.src = "assets/icons/trash.jpg";
+  icon.classList.add("trashIcon");
   icon.addEventListener("click", () => {
     deleteWorks(elem.id);
   });
@@ -27,13 +31,13 @@ export function displayModalGallery(elem) {
   modalGallery.appendChild(fig);
 }
 
-// Fonction pour supprimer un travail
+// FONCTION POUR SUPPRIMER UN TRAVAIL
 async function deleteWorks(id) {
   const url = `http://localhost:5678/api/works/${id}`;
-  if (!localStorage.getItem("token")) {
-    return false;
-  }
   const token = localStorage.getItem("token");
+
+  if (!token) return;
+
   const options = {
     method: "DELETE",
     headers: {
@@ -41,9 +45,15 @@ async function deleteWorks(id) {
     },
   };
 
-  const result = await fetch(url, options);
-  if (result.ok) {
-    deleteItem(id);
+  try {
+    const result = await fetch(url, options);
+    if (result.ok) {
+      deleteItem(id);
+    } else {
+      console.error("Erreur lors de la suppression:", result.status);
+    }
+  } catch (error) {
+    console.error("Erreur lors de l'appel à l'API :", error);
   }
 }
 
@@ -55,27 +65,23 @@ function deleteItem(id) {
   if (galleryItem) galleryItem.remove();
 }
 
-// ############### M  O  D  A  L    2 ###########
+// FONCTION POUR OUVRIR LA MODAL D'AJOUT
 export function displayModalAutre() {
-  const modalAutre = document.getElementById("modalAutre");
-  modalAutre.style.display = "block"; // Affiche la modal
-
-  // Remplir le sélecteur de catégories lorsque la modale est ouverte
+  modalAutre.style.display = "block";
   populateCategorySelect();
 
-  const closeModalAutre = document.getElementById("closeModalAutre");
   closeModalAutre.onclick = function () {
-    modalAutre.style.display = "none"; // Ferme la modal
+    modalAutre.style.display = "none";
   };
 
   window.onclick = function (event) {
     if (event.target === modalAutre) {
-      modalAutre.style.display = "none"; // Ferme la modal si clic en dehors
+      modalAutre.style.display = "none";
     }
   };
 }
 
-// Fonction pour peupler le sélecteur de catégories
+// FONCTION POUR PEUPLER LE SÉLECTEUR DE CATÉGORIES
 async function populateCategorySelect() {
   try {
     const url = "http://localhost:5678/api/categories";
@@ -95,16 +101,68 @@ async function populateCategorySelect() {
   }
 }
 
-// Fonction pour gérer le clic sur le bouton "Ajouter Photo"
-export function setupAddPhotoButton() {
-  const addPhotoButton = document.getElementById("addPhotoButton");
-  if (addPhotoButton) {
-    addPhotoButton.addEventListener("click", displayModalAutre); // Ouvre la deuxième modal
+// FONCTION POUR TÉLÉCHARGER UNE PHOTO
+async function uploadPhoto(file, title, categoryId) {
+  const url = "http://localhost:5678/api/works";
+  const token = localStorage.getItem("token");
+
+  const formData = new FormData();
+  formData.append("image", file);
+  formData.append("title", title);
+  formData.append("categoryId", categoryId);
+
+  const options = {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+    body: formData,
+  };
+
+  try {
+    const response = await fetch(url, options);
+    if (response.ok) {
+      const newPhoto = await response.json();
+      displayWorks(newPhoto);
+      displayModalGallery(newPhoto);
+    } else {
+      console.error("Erreur lors de l'envoi de la photo :", response.status);
+    }
+  } catch (error) {
+    console.error("Erreur lors de l'appel à l'API :", error);
   }
 }
 
-// Appelle cette fonction après le chargement du DOM
+// ÉVÉNEMENT POUR GÉRER LA SOUMISSION DU FORMULAIRE D'AJOUT DE PHOTO
+document
+  .getElementById("addPhotoForm")
+  .addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const fileInput = document.getElementById("photoFile");
+    const titleInput = document.getElementById("photoTitle");
+    const categorySelect = document.getElementById("categorySelect");
+    const file = fileInput.files[0];
+    const title = titleInput.value;
+    const categoryId = categorySelect.value;
+
+    if (file && title && categoryId) {
+      await uploadPhoto(file, title, categoryId);
+      modalAutre.style.display = "none";
+      document.getElementById("addPhotoForm").reset();
+    } else {
+      alert("Veuillez remplir tous les champs.");
+    }
+  });
+
+// INITIALISATION
 document.addEventListener("DOMContentLoaded", function () {
   setupAddPhotoButton();
-  // Autres initialisations si nécessaires
 });
+
+// FONCTION POUR CONFIGURER LE BOUTON D'AJOUT DE PHOTO
+export function setupAddPhotoButton() {
+  if (addPhotoButton) {
+    addPhotoButton.addEventListener("click", displayModalAutre);
+  }
+}

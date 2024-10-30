@@ -1,4 +1,4 @@
-import { displayModalGallery, setupAddPhotoButton } from "./modal.js"; // Assure-toi que le chemin est correct
+import { displayModalGallery, setupAddPhotoButton } from "./modal.js"; // Assurez-vous que le chemin est correct
 
 // Fonction pour récupérer les données des travaux
 async function getData() {
@@ -7,6 +7,8 @@ async function getData() {
     const response = await fetch(url);
     if (!response.ok) throw new Error("Erreur de réseau");
     const data = await response.json();
+
+    console.log("Données récupérées :", data); // Ajoutez ceci pour déboguer
 
     data.forEach((elem) => {
       displayWorks(elem);

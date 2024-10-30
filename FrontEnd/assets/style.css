@@ -385,6 +385,7 @@ nav a {
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
+  color: black;
 }
 
 .modal-content {
@@ -431,6 +432,7 @@ nav a {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  color: black;
 }
 
 #addPhotoForm label {
@@ -442,10 +444,10 @@ nav a {
 #addPhotoForm button {
   width: 237px;
   height: 36px;
-  margin-top: 20px;
+  margin-top: 50px;
   align-self: center;
 
-  background-color: #1d6154;
+  background-color: rgba(167, 167, 167, 1);
 
   color: white;
 }
