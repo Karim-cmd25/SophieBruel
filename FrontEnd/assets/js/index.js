@@ -1,4 +1,4 @@
-import { displayModalGallery } from "./modal.js"; // Assure-toi que le chemin est correct
+import { displayModalGallery, setupAddPhotoButton } from "./modal.js"; // Assure-toi que le chemin est correct
 
 // Fonction pour récupérer les données des travaux
 async function getData() {
@@ -143,4 +143,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
   getData();
   getCategories();
+  setupAddPhotoButton(); // Ajout pour initialiser le bouton d'ajout de photo
 });

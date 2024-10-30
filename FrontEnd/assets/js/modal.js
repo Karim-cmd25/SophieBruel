@@ -60,6 +60,9 @@ export function displayModalAutre() {
   const modalAutre = document.getElementById("modalAutre");
   modalAutre.style.display = "block"; // Affiche la modal
 
+  // Remplir le sélecteur de catégories lorsque la modale est ouverte
+  populateCategorySelect();
+
   const closeModalAutre = document.getElementById("closeModalAutre");
   closeModalAutre.onclick = function () {
     modalAutre.style.display = "none"; // Ferme la modal
@@ -72,7 +75,27 @@ export function displayModalAutre() {
   };
 }
 
-// Fonction pour gérer le clic sur le bouton "ADDPHOTOBUTTON"
+// Fonction pour peupler le sélecteur de catégories
+async function populateCategorySelect() {
+  try {
+    const url = "http://localhost:5678/api/categories";
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Erreur de réseau");
+    const categories = await response.json();
+
+    const categorySelect = document.getElementById("categorySelect");
+    categories.forEach((category) => {
+      const option = document.createElement("option");
+      option.value = category.id;
+      option.textContent = category.name;
+      categorySelect.appendChild(option);
+    });
+  } catch (error) {
+    console.error("Erreur lors de la récupération des catégories :", error);
+  }
+}
+
+// Fonction pour gérer le clic sur le bouton "Ajouter Photo"
 export function setupAddPhotoButton() {
   const addPhotoButton = document.getElementById("addPhotoButton");
   if (addPhotoButton) {
