@@ -174,6 +174,9 @@ document.addEventListener("DOMContentLoaded", function () {
 // FONCTION POUR CONFIGURER LE BOUTON D'AJOUT DE PHOTO
 export function setupAddPhotoButton() {
   if (addPhotoButton) {
-    addPhotoButton.addEventListener("click", displayModalAutre);
+    addPhotoButton.addEventListener("click", () => {
+      modal1.style.display = "none"; // Masquer la modal principale
+      displayModalAutre(); // Afficher la modal d'ajout
+    });
   }
 }
