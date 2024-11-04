@@ -1,4 +1,4 @@
-import { displayModalGallery, setupAddPhotoButton } from "./modal.js"; // Assurez-vous que le chemin est correct
+import { displayModalGallery, setupAddPhotoButton } from "./modal.js";
 
 // Fonction pour récupérer les données des travaux
 async function getData() {
@@ -20,7 +20,7 @@ async function getData() {
 }
 
 // Fonction pour afficher les travaux dans la galerie principale
-function displayWorks(elem) {
+export function displayWorks(elem) {
   const gallery = document.getElementById("gallery");
   const fig = document.createElement("figure");
   fig.setAttribute("class", "gallery-item");

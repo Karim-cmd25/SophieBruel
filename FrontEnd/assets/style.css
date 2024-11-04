@@ -515,3 +515,9 @@ nav a {
   justify-content: center;
   align-self: center;
 }
+.fleche {
+  display: flex;
+
+  height: 4%;
+  align-self: flex-start;
+}

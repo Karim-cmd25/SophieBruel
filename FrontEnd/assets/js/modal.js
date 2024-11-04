@@ -1,8 +1,12 @@
+import { displayWorks } from "./index.js";
+
 // VARIABLES MODALES
 const modalGallery = document.getElementById("modalGallery");
 const modalAutre = document.getElementById("modalAutre");
 const closeModalAutre = document.getElementById("closeModalAutre");
 const addPhotoButton = document.getElementById("addPhotoButton");
+const comebackButton = document.getElementById("comeback"); // Flèche pour revenir
+const modal1 = document.getElementById("myModal"); // Modal principale
 
 // FONCTION POUR AFFICHER LA GALERIE DANS LA MODAL
 export function displayModalGallery(elem) {
@@ -57,6 +61,7 @@ async function deleteWorks(id) {
   }
 }
 
+// FONCTION POUR SUPPRIMER UN ÉLÉMENT DU DOM
 function deleteItem(id) {
   const modalItem = document.getElementById(`mod_${id}`);
   const galleryItem = document.getElementById(`gal_${id}`);
@@ -72,6 +77,11 @@ export function displayModalAutre() {
 
   closeModalAutre.onclick = function () {
     modalAutre.style.display = "none";
+  };
+
+  comebackButton.onclick = function () {
+    modalAutre.style.display = "none"; // Masquer la modal d'ajout
+    modal1.style.display = "block"; // Afficher la modal principale
   };
 
   window.onclick = function (event) {
@@ -90,6 +100,7 @@ async function populateCategorySelect() {
     const categories = await response.json();
 
     const categorySelect = document.getElementById("categorySelect");
+    categorySelect.innerHTML = ""; // Clear previous options
     categories.forEach((category) => {
       const option = document.createElement("option");
       option.value = category.id;
@@ -109,7 +120,7 @@ async function uploadPhoto(file, title, categoryId) {
   const formData = new FormData();
   formData.append("image", file);
   formData.append("title", title);
-  formData.append("categoryId", categoryId);
+  formData.append("category", categoryId);
 
   const options = {
     method: "POST",
