@@ -98,6 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function isAuthenticated() {
     const token = localStorage.getItem("token");
     modifierSection.style.display = token ? "flex" : "none";
+    edition.style.display = token ? "flex" : "none";
   }
 
   function openModal() {

@@ -222,13 +222,10 @@ button {
   width: 179px;
   display: flex;
   align-self: center;
+  background-color: rgba(29, 97, 84, 1);
+  color: white;
 }
 
-#login {
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-}
 #workForm {
   flex-direction: column;
   display: flex;
@@ -520,4 +517,35 @@ nav a {
 
   height: 4%;
   align-self: flex-start;
+}
+.loglog {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.loglog h2 {
+  justify-content: center;
+  display: flex;
+}
+.loglog p {
+  justify-content: center;
+  display: flex;
+  margin-top: 10px;
+}
+
+.log {
+  position: fixed; /* Fixe le footer */
+  bottom: 20px; /* Positionne le footer à 20 pixels du bas */
+  right: 0; /* Le place à droite */
+
+  color: rgba(0, 0, 0, 1);
+
+  text-align: center; /* Centre le texte */
+  padding: 10px; /* Espace autour du texte */
+}
+.loglog a {
+  text-decoration: none;
+  color: rgba(61, 61, 61, 1);
+  text-decoration: underline;
 }

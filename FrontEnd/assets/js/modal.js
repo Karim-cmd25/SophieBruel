@@ -7,6 +7,7 @@ const closeModalAutre = document.getElementById("closeModalAutre");
 const addPhotoButton = document.getElementById("addPhotoButton");
 const comebackButton = document.getElementById("comeback"); // Flèche pour revenir
 const modal1 = document.getElementById("myModal"); // Modal principale
+const deleteModal = document.getElementById("deleteModal"); // Modal de confirmation de suppression
 
 // FONCTION POUR AFFICHER LA GALERIE DANS LA MODAL
 export function displayModalGallery(elem) {
@@ -26,13 +27,29 @@ export function displayModalGallery(elem) {
   icon.src = "assets/icons/trash.jpg";
   icon.classList.add("trashIcon");
   icon.addEventListener("click", () => {
-    deleteWorks(elem.id);
+    confirmDeletePhoto(elem.id); // Appel de la fonction de confirmation
   });
 
   fig.appendChild(img);
   fig.appendChild(caption);
   fig.appendChild(icon);
   modalGallery.appendChild(fig);
+}
+
+// FONCTION POUR CONFIRMER LA SUPPRESSION D'UNE PHOTO
+function confirmDeletePhoto(id) {
+  deleteModal.style.display = "block"; // Affiche la modal de confirmation
+
+  // Gérer le clic sur le bouton "Supprimer"
+  document.getElementById("confirmDelete").onclick = async () => {
+    await deleteWorks(id); // Appelle la fonction de suppression
+    deleteModal.style.display = "none"; // Ferme la modal après suppression
+  };
+
+  // Gérer le clic sur le bouton "Annuler"
+  document.getElementById("cancelDelete").onclick = () => {
+    deleteModal.style.display = "none"; // Ferme la modal sans supprimer
+  };
 }
 
 // FONCTION POUR SUPPRIMER UN TRAVAIL
@@ -64,10 +81,7 @@ async function deleteWorks(id) {
 // FONCTION POUR SUPPRIMER UN ÉLÉMENT DU DOM
 function deleteItem(id) {
   const modalItem = document.getElementById(`mod_${id}`);
-  const galleryItem = document.getElementById(`gal_${id}`);
-
   if (modalItem) modalItem.remove();
-  if (galleryItem) galleryItem.remove();
 }
 
 // FONCTION POUR OUVRIR LA MODAL D'AJOUT
