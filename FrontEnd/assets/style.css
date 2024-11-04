@@ -224,14 +224,7 @@ button {
   align-self: center;
   background-color: rgba(29, 97, 84, 1);
   color: white;
-}
-
-#workForm {
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  width: 235px;
-  align-self: center;
+  height: 36px;
 }
 
 .mdp {
@@ -398,6 +391,7 @@ nav a {
 
 #addPhotoButton {
   margin-top: auto; /* Pousse le bouton en bas */
+  width: 237px;
 }
 #myModal img {
   width: 76px;
@@ -548,4 +542,21 @@ nav a {
   text-decoration: none;
   color: rgba(61, 61, 61, 1);
   text-decoration: underline;
+}
+#workForm {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  width: 235px;
+  align-self: center;
+}
+#workForm input {
+  width: 379px;
+  height: 51px;
+  align-self: center;
+}
+
+#workForm label {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
