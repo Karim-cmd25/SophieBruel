@@ -518,6 +518,7 @@ nav a {
   justify-content: center;
   display: flex;
   flex-direction: column;
+  padding-top: 50px;
 }
 
 .loglog h2 {
@@ -527,7 +528,7 @@ nav a {
 .loglog p {
   justify-content: center;
   display: flex;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .log {
@@ -556,6 +557,8 @@ nav a {
   width: 379px;
   height: 51px;
   align-self: center;
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+  border: none;
 }
 
 #workForm label {
