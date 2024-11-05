@@ -422,7 +422,7 @@ nav a {
 .ajout {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+
   color: black;
 }
 
@@ -438,9 +438,10 @@ nav a {
   margin-top: 20px;
   align-self: center;
 
-  background-color: rgba(167, 167, 167, 1);
+  background-color: rgba(203, 214, 220, 1) !important;
 
-  color: white;
+  color: rgba(48, 102, 133, 1);
+
   border: none;
 }
 
