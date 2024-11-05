@@ -429,18 +429,19 @@ nav a {
 #addPhotoForm label {
   width: 420px;
   height: 51px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 #addPhotoForm button {
   width: 237px;
   height: 36px;
-  margin-top: 50px;
+  margin-top: 20px;
   align-self: center;
 
   background-color: rgba(167, 167, 167, 1);
 
   color: white;
+  border: none;
 }
 
 .tout {
@@ -450,9 +451,7 @@ nav a {
 }
 
 #addPhotoForm input {
-  width: 420px;
   height: 51px;
-  margin-top: -25px;
 }
 
 #closeModalAutre {
@@ -471,7 +470,7 @@ nav a {
   display: flex;
   justify-content: center; /* Centre horizontalement */
   align-items: center; /* Centre verticalement */
-  height: 100px; /* Ajuste la hauteur si besoin */
+  height: 167px; /* Ajuste la hauteur si besoin */
   width: 100%;
   background-color: rgba(232, 241, 246, 1);
   flex-direction: column;
@@ -479,8 +478,8 @@ nav a {
 }
 
 .carre img {
-  width: 68px; /* Largeur de l'image */
-  height: 59px; /* Hauteur de l'image */
+  width: 76px; /* Largeur de l'image */
+  height: 76px; /* Hauteur de l'image */
 }
 
 .carre button {
@@ -495,6 +494,9 @@ nav a {
   height: 51px;
   width: 420px;
   margin-top: -25px;
+}
+#categorySelect button {
+  margin-bottom: 100px;
 }
 
 .valider {
@@ -559,4 +561,31 @@ nav a {
 #workForm label {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+#photoFile {
+  border-radius: 10px;
+}
+
+.ajouuut {
+  margin-top: 0px !important;
+
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+#photoUploadButton {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.texte {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#area {
+  margin-bottom: -30px !important;
 }

@@ -144,6 +144,20 @@ document.addEventListener("DOMContentLoaded", function () {
     deleteModal.style.display = "none";
   });
 
+  //################fonction LOGIN / LOGOUT ######### CLEAR TOKEN #############
+
+  async function main() {
+    await createGalleryItem();
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const isAuthentified = token !== null;
+    if (isAuthentified) {
+      document.querySelector('a[href="login.html"]').innerText = "Logout";
+      document.querySelector('a[href="login.html"]').id = "Logout";
+    }
+  }
+  main();
+
   getData();
   getCategories();
   setupAddPhotoButton(); // Ajout pour initialiser le bouton d'ajout de photo

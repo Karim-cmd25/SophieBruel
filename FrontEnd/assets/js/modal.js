@@ -159,6 +159,7 @@ async function uploadPhoto(file, title, categoryId) {
 }
 
 // ÉVÉNEMENT POUR GÉRER LA SOUMISSION DU FORMULAIRE D'AJOUT DE PHOTO
+// ÉVÉNEMENT POUR GÉRER LA SOUMISSION DU FORMULAIRE D'AJOUT DE PHOTO
 document
   .getElementById("addPhotoForm")
   .addEventListener("submit", async (event) => {
@@ -167,14 +168,15 @@ document
     const fileInput = document.getElementById("photoFile");
     const titleInput = document.getElementById("photoTitle");
     const categorySelect = document.getElementById("categorySelect");
-    const file = fileInput.files[0];
+    const file = fileInput.files[0]; // Obtenir le fichier sélectionné
     const title = titleInput.value;
     const categoryId = categorySelect.value;
 
+    // Vérifier que tous les champs sont remplis
     if (file && title && categoryId) {
-      await uploadPhoto(file, title, categoryId);
-      modalAutre.style.display = "none";
-      document.getElementById("addPhotoForm").reset();
+      await uploadPhoto(file, title, categoryId); // Appel à la fonction de téléchargement
+      modalAutre.style.display = "none"; // Masquer la modal après ajout
+      document.getElementById("addPhotoForm").reset(); // Réinitialiser le formulaire
     } else {
       alert("Veuillez remplir tous les champs.");
     }
@@ -188,9 +190,27 @@ document.addEventListener("DOMContentLoaded", function () {
 // FONCTION POUR CONFIGURER LE BOUTON D'AJOUT DE PHOTO
 export function setupAddPhotoButton() {
   if (addPhotoButton) {
+    // Lorsque l'utilisateur clique sur le bouton d'ajout de photo
     addPhotoButton.addEventListener("click", () => {
       modal1.style.display = "none"; // Masquer la modal principale
-      displayModalAutre(); // Afficher la modal d'ajout
+      displayModalAutre(); // Afficher la modal d'ajout de photo
     });
   }
+
+  // Gérer le clic sur le bouton "Ajouter photo"
+  const customFileInputButton = document.getElementById("photoUploadButton");
+  const fileInput = document.getElementById("photoFile");
+
+  if (customFileInputButton && fileInput) {
+    customFileInputButton.addEventListener("click", () => {
+      // Simuler un clic sur l'input de type file
+      fileInput.click();
+    });
+  }
+
+  // Gérer la sélection de fichier (en affichant le nom du fichier dans le bouton)
+  fileInput.addEventListener("change", () => {
+    const fileName = fileInput.files[0]?.name || "Aucun fichier sélectionné";
+    customFileInputButton.textContent = `Fichier sélectionné: ${fileName}`;
+  });
 }

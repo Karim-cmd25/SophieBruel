@@ -100,11 +100,26 @@
                 src="assets/icons/montagne.svg"
                 alt="Description de l'image"
               />
-              <label for="photoFile">Fichier :</label>
-              <input type="file" id="photoFile" accept="image/*" required />
-              <p>jpg, png : 4mo max</p>
+
+              <!-- Bouton d'ajout de photo -->
+              <label for="photoFile" class="ajouuut">
+                <button type="button" id="photoUploadButton">
+                  + Ajouter photo
+                </button>
+              </label>
+
+              <!-- Input File caché -->
+              <input
+                type="file"
+                id="photoFile"
+                accept="image/*"
+                required
+                style="display: none"
+              />
+
+              <p class="texte">jpg, png : 4mo max</p>
             </section>
-            <label for="photoTitle">Titre :</label>
+            <label for="photoTitle" id="area">Titre :</label>
             <input type="text" id="photoTitle" autocomplete="off" required />
 
             <label for="categorySelect">Catégorie :</label>
