@@ -524,6 +524,7 @@ nav a {
 .loglog h2 {
   justify-content: center;
   display: flex;
+  margin-bottom: 30px;
 }
 .loglog p {
   justify-content: center;
@@ -564,6 +565,7 @@ nav a {
 #workForm label {
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: -65px;
 }
 
 #photoFile {
