@@ -110,6 +110,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Fonction LOGIN / LOGOUT ######### CLEAR TOKEN #############
+  const stateLog = document.querySelector('a[href="./login.html"]');
+  const token = localStorage.getItem("token");
+
+  if (stateLog) {
+    if (token) {
+      stateLog.textContent = "Logout";
+      stateLog.addEventListener("click", (event) => {
+        event.preventDefault();
+        localStorage.clear();
+        window.location.reload(); // Recharger la page après déconnexion
+      });
+    } else {
+      stateLog.textContent = "Login";
+    }
+  }
+
+  // Afficher les éléments en fonction de l'authentification
   isAuthenticated();
 
   if (editButton) {
@@ -144,20 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
     deleteModal.style.display = "none";
   });
 
-  //################fonction LOGIN / LOGOUT ######### CLEAR TOKEN #############
-
-  async function main() {
-    await createGalleryItem();
-    const token = localStorage.getItem("token");
-    console.log(token);
-    const isAuthentified = token !== null;
-    if (isAuthentified) {
-      document.querySelector('a[href="login.html"]').innerText = "Logout";
-      document.querySelector('a[href="login.html"]').id = "Logout";
-    }
-  }
-  main();
-
+  // Appel des fonctions
   getData();
   getCategories();
   setupAddPhotoButton(); // Ajout pour initialiser le bouton d'ajout de photo

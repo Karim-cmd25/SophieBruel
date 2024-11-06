@@ -502,6 +502,12 @@ nav a {
 }
 #categorySelect button {
   margin-bottom: 100px;
+  background-color: rgba(167, 167, 167, 1) !important;
+}
+
+#categorySelect submit {
+  background-color: rgba(167, 167, 167, 1) !important;
+  color: white;
 }
 
 .valider {
