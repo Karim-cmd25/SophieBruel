@@ -327,6 +327,11 @@ nav a {
   width: 630px;
   height: 688px;
 }
+.modal-content h2 {
+  justify-content: center;
+  align-self: center;
+  display: flex;
+}
 
 #editTitle {
   display: flex;
@@ -604,4 +609,20 @@ nav a {
 
 #area {
   margin-bottom: -30px !important;
+}
+
+#confirmDelete {
+  display: flex;
+  width: 20%;
+  justify-content: center;
+  align-self: center;
+  margin-top: 20px;
+}
+
+#cancelDelete {
+  display: flex;
+  width: 20%;
+  justify-content: center;
+  align-self: center;
+  margin-top: 10px;
 }
