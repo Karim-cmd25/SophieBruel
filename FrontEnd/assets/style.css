@@ -331,6 +331,7 @@ nav a {
   justify-content: center;
   align-self: center;
   display: flex;
+  font-weight: normal !important;
 }
 
 #editTitle {
@@ -370,7 +371,7 @@ nav a {
   position: absolute;
   bottom: 1px;
 
-  left: 43%;
+  left: 37%;
   background-color: #1d6154;
   color: white;
   width: 200px;
@@ -429,6 +430,10 @@ nav a {
   justify-content: center;
 
   color: black;
+}
+.ajout h2 {
+  font-weight: normal !important;
+  font-size: 1000px;
 }
 
 #addPhotoForm label {

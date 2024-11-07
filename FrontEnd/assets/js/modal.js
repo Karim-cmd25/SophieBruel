@@ -31,7 +31,7 @@ export function displayModalGallery(elem) {
   });
 
   fig.appendChild(img);
-  fig.appendChild(caption);
+
   fig.appendChild(icon);
   modalGallery.appendChild(fig);
 }
@@ -251,6 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
         customFileInputButton.style.display = "block"; // Réafficher le bouton "+ Ajouter photo"
         montagneIcon.style.display = "block"; // Réafficher l'icône montagne
         texteJpg.style.display = "block"; // Réafficher le texte "jpg, png : 4mo max"
+        validerButton.classList.remove("vert");
       }
     });
   } else {
