@@ -368,7 +368,6 @@ nav a {
   color: white;
 }
 #addPhotoButton {
-  position: absolute;
   bottom: 1px;
 
   left: 37%;
@@ -376,6 +375,7 @@ nav a {
   color: white;
   width: 200px;
   height: 40px;
+  align-self: center;
 }
 .gal {
   display: flex;
@@ -398,6 +398,7 @@ nav a {
 #addPhotoButton {
   margin-top: auto; /* Pousse le bouton en bas */
   width: 237px;
+  margin-bottom: auto;
 }
 #myModal img {
   width: 76px;
