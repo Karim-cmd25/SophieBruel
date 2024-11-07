@@ -443,7 +443,7 @@ nav a {
   margin-top: 20px;
   align-self: center;
 
-  background-color: rgba(203, 214, 220, 1) !important;
+  background-color: rgba(203, 214, 220, 1);
 
   color: rgba(48, 102, 133, 1);
 
@@ -460,6 +460,10 @@ nav a {
   height: 51px;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.vert {
+  color: white !important;
+  background-color: rgba(167, 167, 167, 1) !important;
 }
 
 #closeModalAutre {
@@ -600,6 +604,7 @@ nav a {
   display: flex;
   justify-content: center;
   align-self: center;
+  background-color: rgba(203, 214, 220, 1) !important;
 }
 
 .texte {
