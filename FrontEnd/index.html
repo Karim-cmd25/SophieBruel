@@ -67,7 +67,7 @@
           <button id="editButton">Modifier</button>
         </div>
       </section>
-
+      <!-- modal 1 -->
       <div id="myModal" class="modal">
         <div class="modal-content">
           <span class="close" id="closeModal">&times;</span>
@@ -76,20 +76,22 @@
           <button id="addPhotoButton">Ajouter une photo</button>
         </div>
       </div>
-
+      <!-- croix fermeture modal 1 -->
       <div id="deleteModal" class="modal">
         <div class="modal-content">
           <span class="close" id="closeDeleteModal">&times;</span>
+          <!-- message confirmation suppressiond d'un projet -->
           <h2>Confirmer la Suppression</h2>
           <button id="confirmDelete">Supprimer</button>
           <button id="cancelDelete">Annuler</button>
         </div>
       </div>
-
+      <!-- Modal 2 -->
       <div id="modalAutre" class="modal">
         <div class="modal-content">
           <span class="close" id="closeModalAutre">&times;</span>
           <div id="comeback" class="fleche">
+            <!-- fléche passage de modal 2 à modal 1  -->
             <img src="assets/icons/arrow.png" alt="flèche" />
           </div>
 
@@ -112,7 +114,7 @@
               <input
                 type="file"
                 id="photoFile"
-                accept="image/*"
+                accept="image/webp, image/jpeg, image/png"
                 required
                 style="display: none"
               />
