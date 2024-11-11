@@ -668,3 +668,15 @@ button:focus {
   width: 420px; /* Ajuster la largeur de la ligne */
   margin: 20px auto; /* Centrer et ajouter un peu d'espace autour */
 }
+
+button.vert {
+  background-color: #ccc; /* Gris par défaut */
+  color: white;
+  font-size: 16px;
+  cursor: not-allowed; /* On indique que le bouton est désactivé par défaut */
+}
+
+button.vert.valid {
+  background-color: #1d6154; /* Vert lorsque toutes les conditions sont remplies */
+  cursor: pointer; /* Change le curseur pour indiquer que le bouton est activé */
+}

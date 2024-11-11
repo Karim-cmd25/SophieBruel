@@ -205,60 +205,87 @@ document.addEventListener("DOMContentLoaded", () => {
   const customFileInputButton = document.getElementById("photoUploadButton");
   const fileInput = document.getElementById("photoFile");
   const imagePreview = document.getElementById("imagePreview");
-  const carreSection = document.querySelector(".carre"); // Cibler l'élément .carre
-  const imagePreviewContainer = document.getElementById(
-    "imagePreviewContainer"
-  ); // Conteneur pour l'aperçu de l'image
-  const montagneIcon = document.querySelector(".carre img"); // Icône montagne
-  const texteJpg = document.querySelector(".carre p"); // Texte "jpg, png : 4mo max"
+  const photoTitle = document.getElementById("photoTitle");
+  const categorySelect = document.getElementById("categorySelect");
+  const validerButton = document.querySelector("button.vert");
 
-  if (customFileInputButton && fileInput && imagePreview) {
-    // 1. Gérer le clic sur le bouton personnalisé pour ouvrir le sélecteur de fichier
-    customFileInputButton.addEventListener("click", () => {
-      fileInput.click(); // Simuler un clic sur l'input file caché
-    });
+  // Fonction pour vérifier si toutes les conditions sont remplies
+  // Fonction pour vérifier si toutes les conditions sont remplies
+  function checkConditions() {
+    const isPhotoUploaded = imagePreview.style.display === "block";
+    const isTitleEntered = photoTitle.value.trim() !== "";
+    const isCategorySelected = categorySelect.value !== "";
 
-    // 2. Gérer le changement de fichier sélectionné
-    fileInput.addEventListener("change", () => {
-      const file = fileInput.files[0]; // Récupérer le fichier sélectionné
-      const maxfile = 4 * 1024 * 1024;
-      if (file && file.size < maxfile) {
-        // Afficher le nom du fichier sur le bouton
-        customFileInputButton.textContent = `Fichier sélectionné: ${file.name}`;
-
-        // Créer un objet FileReader pour lire le fichier
-        const reader = new FileReader();
-
-        // Lorsque la lecture est terminée, définir l'URL de l'image pour la prévisualisation
-        reader.onload = function (e) {
-          imagePreview.src = e.target.result; // Définir l'image source
-          imagePreview.style.display = "block"; // Afficher l'image de prévisualisation
-          imagePreviewContainer.style.display = "block"; // Afficher le conteneur de prévisualisation
-
-          // Masquer les éléments spécifiques à l'intérieur de .carre
-          customFileInputButton.style.display = "none"; // Masquer le bouton "+ Ajouter photo"
-          montagneIcon.style.display = "none"; // Masquer l'icône montagne
-          texteJpg.style.display = "none"; // Masquer le texte "jpg, png : 4mo max"
-        };
-
-        // Lire le fichier sous forme d'URL (Data URL)
-        reader.readAsDataURL(file);
-      } else {
-        alert("fichier trop lourd");
-        // Si aucun fichier n'est sélectionné, masquer la prévisualisation
-        imagePreview.style.display = "none";
-        imagePreviewContainer.style.display = "none"; // Cacher le conteneur de prévisualisation
-
-        // Réafficher les éléments cachés
-        customFileInputButton.style.display = "block"; // Réafficher le bouton "+ Ajouter photo"
-        montagneIcon.style.display = "block"; // Réafficher l'icône montagne
-        texteJpg.style.display = "block"; // Réafficher le texte "jpg, png : 4mo max"
-        validerButton.classList.remove("vert");
-      }
-    });
-  } else {
-    console.error(
-      "Un ou plusieurs éléments nécessaires n'ont pas été trouvés dans le DOM."
-    );
+    // Si toutes les conditions sont remplies, ajouter la classe "valid" au bouton
+    if (isPhotoUploaded && isTitleEntered && isCategorySelected) {
+      validerButton.classList.add("valid"); // Ajouter la classe pour rendre le bouton vert
+      validerButton.disabled = false; // Activer le bouton
+      // Forcer le style avec !important en JavaScript
+      validerButton.style.setProperty(
+        "background-color",
+        "#1d6154",
+        "important"
+      );
+      validerButton.style.setProperty("color", "white", "important");
+    } else {
+      validerButton.classList.remove("valid"); // Retirer la classe pour revenir à l'état initial
+      validerButton.disabled = true; // Désactiver le bouton
+      // Réinitialiser la couleur du bouton en utilisant !important
+      validerButton.style.setProperty("background-color", "#ccc", "important");
+      validerButton.style.setProperty("color", "#fff", "important");
+    }
   }
+
+  // 1. Gérer le clic sur le bouton personnalisé pour ouvrir le sélecteur de fichier
+  customFileInputButton.addEventListener("click", () => {
+    fileInput.click(); // Simuler un clic sur l'input file caché
+  });
+
+  // 2. Gérer le changement de fichier sélectionné
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0]; // Récupérer le fichier sélectionné
+    const maxfile = 4 * 1024 * 1024; // Taille maximale du fichier (4 Mo)
+
+    if (file && file.size < maxfile) {
+      // Afficher le nom du fichier sur le bouton
+      customFileInputButton.textContent = `Fichier sélectionné: ${file.name}`;
+
+      // Créer un objet FileReader pour lire le fichier
+      const reader = new FileReader();
+
+      // Lorsque la lecture est terminée, définir l'URL de l'image pour la prévisualisation
+      reader.onload = function (e) {
+        imagePreview.src = e.target.result; // Définir l'image source
+        imagePreview.style.display = "block"; // Afficher l'image de prévisualisation
+        document.getElementById("imagePreviewContainer").style.display =
+          "block"; // Afficher le conteneur de prévisualisation
+
+        // Masquer les éléments spécifiques à l'intérieur de .carre
+        customFileInputButton.style.display = "none"; // Masquer le bouton "+ Ajouter photo"
+        document.querySelector(".carre img").style.display = "none"; // Masquer l'icône montagne
+        document.querySelector(".carre p").style.display = "none"; // Masquer le texte "jpg, png : 4mo max"
+      };
+
+      // Lire le fichier sous forme d'URL (Data URL)
+      reader.readAsDataURL(file);
+    } else {
+      alert("fichier trop lourd");
+      // Si aucun fichier n'est sélectionné, masquer la prévisualisation
+      imagePreview.style.display = "none";
+      document.getElementById("imagePreviewContainer").style.display = "none"; // Cacher le conteneur de prévisualisation
+
+      // Réafficher les éléments cachés
+      customFileInputButton.style.display = "block"; // Réafficher le bouton "+ Ajouter photo"
+      document.querySelector(".carre img").style.display = "block"; // Réafficher l'icône montagne
+      document.querySelector(".carre p").style.display = "block"; // Réafficher le texte "jpg, png : 4mo max"
+    }
+
+    checkConditions(); // Vérifier les conditions après avoir sélectionné un fichier
+  });
+
+  // 3. Vérifier si un titre a été ajouté
+  photoTitle.addEventListener("input", checkConditions);
+
+  // 4. Vérifier si une catégorie a été sélectionnée
+  categorySelect.addEventListener("change", checkConditions);
 });
