@@ -27,7 +27,8 @@ export function displayModalGallery(elem) {
   icon.src = "assets/icons/trash.jpg";
   icon.classList.add("trashIcon");
   icon.addEventListener("click", () => {
-    confirmDeletePhoto(elem.id); // Appel de la fonction de confirmation suppression
+    //confirmDeletePhoto(elem.id); // Appel de la fonction de confirmation suppression
+    deleteWorks(elem.id);
   });
 
   fig.appendChild(img);
@@ -54,34 +55,39 @@ function confirmDeletePhoto(id) {
 
 // FONCTION POUR SUPPRIMER UN PROJET
 async function deleteWorks(id) {
-  const url = `http://localhost:5678/api/works/${id}`;
-  const token = localStorage.getItem("token");
+  if (confirm("voulez vous supprimez cette photo ?")) {
+    const url = `http://localhost:5678/api/works/${id}`;
+    const token = localStorage.getItem("token");
 
-  if (!token) return;
+    if (!token) return;
 
-  const options = {
-    method: "DELETE",
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  };
+    const options = {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    };
 
-  try {
-    const result = await fetch(url, options);
-    if (result.ok) {
-      deleteItem(id);
-    } else {
-      console.error("Erreur lors de la suppression:", result.status);
+    try {
+      const result = await fetch(url, options);
+      if (result.ok) {
+        deleteItem(id);
+      } else {
+        console.error("Erreur lors de la suppression:", result.status);
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'appel à l'API :", error);
     }
-  } catch (error) {
-    console.error("Erreur lors de l'appel à l'API :", error);
   }
+  return false;
 }
 
 // FONCTION POUR SUPPRIMER UN ÉLÉMENT DU DOM
 function deleteItem(id) {
   const modalItem = document.getElementById(`mod_${id}`);
   if (modalItem) modalItem.remove();
+  const galleryItems = document.getElementById(`gal_${id}`);
+  if (galleryItems) galleryItems.remove();
 }
 
 // FONCTION POUR OUVRIR LA MODAL D'AJOUT
@@ -114,7 +120,7 @@ async function populateCategorySelect() {
     const categories = await response.json();
 
     const categorySelect = document.getElementById("categorySelect");
-    categorySelect.innerHTML = ""; // Clear previous options
+    //categorySelect.innerHTML = ""; // Clear previous options
     categories.forEach((category) => {
       const option = document.createElement("option");
       option.value = category.id;
@@ -182,11 +188,6 @@ document
     }
   });
 
-// INITIALISATION
-document.addEventListener("DOMContentLoaded", function () {
-  setupAddPhotoButton();
-});
-
 // FONCTION POUR CONFIGURER LE BOUTON D'AJOUT DE PHOTO
 export function setupAddPhotoButton() {
   if (addPhotoButton) {
@@ -220,8 +221,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // 2. Gérer le changement de fichier sélectionné
     fileInput.addEventListener("change", () => {
       const file = fileInput.files[0]; // Récupérer le fichier sélectionné
-
-      if (file) {
+      const maxfile = 4 * 1024 * 1024;
+      if (file && file.size < maxfile) {
         // Afficher le nom du fichier sur le bouton
         customFileInputButton.textContent = `Fichier sélectionné: ${file.name}`;
 
@@ -243,6 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Lire le fichier sous forme d'URL (Data URL)
         reader.readAsDataURL(file);
       } else {
+        alert("fichier trop lourd");
         // Si aucun fichier n'est sélectionné, masquer la prévisualisation
         imagePreview.style.display = "none";
         imagePreviewContainer.style.display = "none"; // Cacher le conteneur de prévisualisation

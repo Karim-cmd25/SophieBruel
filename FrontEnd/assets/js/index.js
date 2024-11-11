@@ -94,13 +94,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const myModal = document.getElementById("myModal");
   const closeModal = document.getElementById("closeModal");
   const editionDiv = document.getElementById("edition");
+  const filtersContainer = document.getElementById("boutton"); // Conteneur des boutons de filtre
 
+  // Fonction de vérification d'authentification
   function isAuthenticated() {
     const token = localStorage.getItem("token");
+    // Afficher ou masquer la section "modifier" en fonction de la présence du token
     modifierSection.style.display = token ? "flex" : "none";
-    edition.style.display = token ? "flex" : "none";
+    editionDiv.style.display = token ? "flex" : "none";
+
+    // Masquer les filtres si l'utilisateur est connecté
+    filtersContainer.style.display = token ? "none" : "flex";
   }
 
+  // Fonction pour ouvrir la modale de modification
   function openModal() {
     const token = localStorage.getItem("token");
     if (token) {
@@ -110,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Fonction LOGIN / LOGOUT ######### CLEAR TOKEN #############
+  // Gestion de la connexion et de la déconnexion
   const stateLog = document.querySelector('a[href="./login.html"]');
   const token = localStorage.getItem("token");
 
@@ -119,15 +126,15 @@ document.addEventListener("DOMContentLoaded", function () {
       stateLog.textContent = "Logout";
       stateLog.addEventListener("click", (event) => {
         event.preventDefault();
-        localStorage.clear();
-        window.location.reload(); // Recharger la page après déconnexion
+        localStorage.clear(); // Effacer le token
+        window.location.reload(); // Recharger la page pour mettre à jour l'interface
       });
     } else {
       stateLog.textContent = "Login";
     }
   }
 
-  // Afficher les éléments en fonction de l'authentification
+  // Afficher ou masquer les éléments en fonction de l'authentification
   isAuthenticated();
 
   if (editButton) {
@@ -162,8 +169,8 @@ document.addEventListener("DOMContentLoaded", function () {
     deleteModal.style.display = "none";
   });
 
-  // Appel des fonctions
+  // Appels aux fonctions pour récupérer les travaux et les catégories
   getData();
   getCategories();
-  setupAddPhotoButton(); // Ajout pour initialiser le bouton d'ajout de photo
+  setupAddPhotoButton(); // Initialiser le bouton d'ajout de photo
 });
