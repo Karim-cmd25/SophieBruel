@@ -32,7 +32,6 @@ export function displayModalGallery(elem) {
   });
 
   fig.appendChild(img);
-
   fig.appendChild(icon);
   modalGallery.appendChild(fig);
 }
@@ -120,7 +119,6 @@ async function populateCategorySelect() {
     const categories = await response.json();
 
     const categorySelect = document.getElementById("categorySelect");
-    //categorySelect.innerHTML = ""; // Clear previous options
     categories.forEach((category) => {
       const option = document.createElement("option");
       option.value = category.id;
@@ -155,7 +153,13 @@ async function uploadPhoto(file, title, categoryId) {
     if (response.ok) {
       const newPhoto = await response.json();
       displayWorks(newPhoto);
-      displayModalGallery(newPhoto);
+      displayModalGallery(newPhoto); // Afficher la nouvelle photo dans la galerie
+
+      // Réinitialiser le formulaire et l'image de prévisualisation
+      resetForm();
+
+      // Vérifier les conditions pour activer/désactiver le bouton "Valider"
+      checkConditions();
     } else {
       console.error("Erreur lors de l'envoi de la photo :", response.status);
     }
@@ -164,8 +168,38 @@ async function uploadPhoto(file, title, categoryId) {
   }
 }
 
-// ÉVÉNEMENT POUR GÉRER LA SOUMISSION DU FORMULAIRE D'AJOUT DE PHOTO
+// FONCTION POUR RÉINITIALISER LE FORMULAIRE
+function resetForm() {
+  const photoTitle = document.getElementById("photoTitle");
+  const categorySelect = document.getElementById("categorySelect");
+  const imagePreview = document.getElementById("imagePreview");
+  const customFileInputButton = document.getElementById("photoUploadButton");
 
+  // Réinitialiser les champs de texte
+  photoTitle.value = "";
+  categorySelect.value = "";
+
+  // Réinitialiser la prévisualisation de l'image
+  imagePreview.style.display = "none"; // Cacher l'image prévisualisée
+  document.getElementById("imagePreviewContainer").style.display = "none"; // Cacher le conteneur de prévisualisation
+
+  // Réinitialiser le texte du bouton d'upload
+  customFileInputButton.textContent = "+ Ajouter photo";
+
+  // Réafficher les éléments masqués
+  customFileInputButton.style.display = "block";
+  document.querySelector(".carre img").style.display = "block";
+  document.querySelector(".carre p").style.display = "block";
+
+  // Réinitialiser le bouton "Valider"
+  const validerButton = document.querySelector("button.vert");
+  validerButton.classList.remove("valid");
+  validerButton.disabled = true; // Désactiver le bouton
+  validerButton.style.setProperty("background-color", "#ccc", "important");
+  validerButton.style.setProperty("color", "#fff", "important");
+}
+
+// ÉVÉNEMENT POUR GÉRER LA SOUMISSION DU FORMULAIRE D'AJOUT DE PHOTO
 document
   .getElementById("addPhotoForm")
   .addEventListener("submit", async (event) => {
@@ -182,7 +216,7 @@ document
     if (file && title && categoryId) {
       await uploadPhoto(file, title, categoryId); // Appel à la fonction de téléchargement
       modalAutre.style.display = "none"; // Masquer la modal après ajout
-      document.getElementById("addPhotoForm").reset(); // Réinitialiser le formulaire
+      resetForm(); // Réinitialiser le formulaire après soumission
     } else {
       alert("Veuillez remplir tous les champs.");
     }
@@ -199,7 +233,6 @@ export function setupAddPhotoButton() {
   }
 }
 
-// Sélectionner les éléments
 // Sélectionner les éléments nécessaires dans le DOM
 document.addEventListener("DOMContentLoaded", () => {
   const customFileInputButton = document.getElementById("photoUploadButton");
@@ -209,7 +242,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const categorySelect = document.getElementById("categorySelect");
   const validerButton = document.querySelector("button.vert");
 
-  // Fonction pour vérifier si toutes les conditions sont remplies
   // Fonction pour vérifier si toutes les conditions sont remplies
   function checkConditions() {
     const isPhotoUploaded = imagePreview.style.display === "block";
