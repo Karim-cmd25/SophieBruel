@@ -8,7 +8,7 @@ async function getData() {
     if (!response.ok) throw new Error("Erreur de réseau");
     const data = await response.json();
 
-    console.log("Données récupérées :", data); // Ajoutez ceci pour déboguer
+    console.log("Données récupérées :", data);
 
     data.forEach((elem) => {
       displayWorks(elem);

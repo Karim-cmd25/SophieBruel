@@ -241,14 +241,6 @@ button {
   flex-direction: center;
 }
 
-.gallery {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-}
-
 .gallery img {
   width: 100%;
 }
@@ -342,7 +334,8 @@ nav a {
   justify-content: center;
   align-self: center;
   display: flex;
-  font-weight: normal !important;
+  font-family: work sans;
+  font: work sans;
 }
 
 #editTitle {
@@ -402,9 +395,11 @@ nav a {
   height: 670px; /* Ajustez selon vos besoins */
 }
 
-.modal-gallery {
-  flex: 1; /* Prend tout l'espace disponible */
-  overflow-y: auto; /* Ajoute un défilement si nécessaire */
+#modalGallery {
+  display: flex !important;
+  gap: 40px !important;
+  flex-wrap: wrap !important;
+  margin-left: 40px;
 }
 
 #addPhotoButton {
@@ -425,10 +420,17 @@ nav a {
 
 .trashIcon {
   position: absolute;
-  top: 1px;
-  height: 17px !important;
-  width: 17px !important;
-  right: 123px;
+  top: 5px;
+  height: 15px !important;
+  width: 15px !important;
+  right: 2px;
+}
+.gallery {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
 }
 
 #addPhotoForm {
