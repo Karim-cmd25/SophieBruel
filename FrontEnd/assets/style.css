@@ -397,9 +397,11 @@ nav a {
 
 #modalGallery {
   display: flex !important;
-  gap: 40px !important;
+
   flex-wrap: wrap !important;
-  margin-left: 40px;
+  margin-left: 80px;
+  max-width: 80%;
+  margin-bottom: 60px;
 }
 
 #addPhotoButton {
