@@ -27,34 +27,22 @@ export function displayModalGallery(elem) {
   icon.src = "assets/icons/trash.jpg";
   icon.classList.add("trashIcon");
   icon.addEventListener("click", () => {
-    //confirmDeletePhoto(elem.id); // Appel de la fonction de confirmation suppression
     deleteWorks(elem.id);
   });
 
   fig.appendChild(img);
   fig.appendChild(icon);
   modalGallery.appendChild(fig);
-}
-
-// FONCTION POUR CONFIRMER LA SUPPRESSION D'UNE PHOTO
-function confirmDeletePhoto(id) {
-  deleteModal.style.display = "block"; // Affiche la modal de confirmation
-
-  // Gérer le clic sur le bouton "Supprimer"
-  document.getElementById("confirmDelete").onclick = async () => {
-    await deleteWorks(id); // Appelle la fonction de suppression
-    deleteModal.style.display = "none"; // Ferme la modal après suppression
-  };
-
-  // Gérer le clic sur le bouton "Annuler"
-  document.getElementById("cancelDelete").onclick = () => {
-    deleteModal.style.display = "none"; // Ferme la modal sans supprimer
-  };
+  window.addEventListener("click", function (event) {
+    if (event.target === modal1) {
+      modal1.style.display = "none"; // Fermer modal 1 si on clique en dehors
+    }
+  });
 }
 
 // FONCTION POUR SUPPRIMER UN PROJET
 async function deleteWorks(id) {
-  if (confirm("voulez vous supprimez cette photo ?")) {
+  if (confirm("Voulez-vous supprimer cette photo ?")) {
     const url = `http://localhost:5678/api/works/${id}`;
     const token = localStorage.getItem("token");
 
@@ -188,8 +176,8 @@ function resetForm() {
 
   // Réafficher les éléments masqués
   customFileInputButton.style.display = "block";
-  document.querySelector(".carre img").style.display = "block";
-  document.querySelector(".carre p").style.display = "block";
+  document.querySelector(".carre img").style.display = "block"; // Réafficher l'icône montagne
+  document.querySelector(".carre p").style.display = "block"; // Réafficher le texte "jpg, png : 4mo max"
 
   // Réinitialiser le bouton "Valider"
   const validerButton = document.querySelector("button.vert");
@@ -215,8 +203,9 @@ document
     // Vérifier que tous les champs sont remplis
     if (file && title && categoryId) {
       await uploadPhoto(file, title, categoryId); // Appel à la fonction de téléchargement
-      modalAutre.style.display = "none"; // Masquer la modal après ajout
+      // Ne pas fermer la modal ici
       resetForm(); // Réinitialiser le formulaire après soumission
+      checkConditions(); // Vérifier l'état du bouton
     } else {
       alert("Veuillez remplir tous les champs.");
     }
