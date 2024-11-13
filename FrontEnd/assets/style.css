@@ -392,7 +392,7 @@ nav a {
 .modal-content {
   display: flex;
   flex-direction: column;
-  height: 670px; /* Ajustez selon vos besoins */
+  height: 670px;
 }
 
 #modalGallery {
@@ -405,7 +405,7 @@ nav a {
 }
 
 #addPhotoButton {
-  margin-top: auto; /* Pousse le bouton en bas */
+  margin-top: auto;
   width: 237px;
   margin-bottom: auto;
 }
@@ -417,7 +417,7 @@ nav a {
 }
 
 .gallery-item {
-  position: relative; /* Permet de positionner l'icône par rapport à l'élément */
+  position: relative;
 }
 
 .trashIcon {
@@ -575,14 +575,14 @@ nav a {
 }
 
 .log {
-  position: fixed; /* Fixe le footer */
-  bottom: 20px; /* Positionne le footer à 20 pixels du bas */
-  right: 0; /* Le place à droite */
+  position: fixed;
+  bottom: 20px;
+  right: 0;
 
   color: rgba(0, 0, 0, 1);
 
-  text-align: center; /* Centre le texte */
-  padding: 10px; /* Espace autour du texte */
+  text-align: center;
+  padding: 10px;
 }
 .loglog a {
   text-decoration: none;
@@ -677,7 +677,7 @@ button.vert {
   background-color: #ccc; /* Gris par défaut */
   color: white;
   font-size: 16px;
-  cursor: not-allowed; /* On indique que le bouton est désactivé par défaut */
+  cursor: not-allowed;
 }
 
 button.vert.valid {

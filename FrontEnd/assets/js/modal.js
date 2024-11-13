@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isPhotoUploaded && isTitleEntered && isCategorySelected) {
       validerButton.classList.add("valid"); // Ajouter la classe pour rendre le bouton vert
       validerButton.disabled = false; // Activer le bouton
-      // Forcer le style avec !important en JavaScript
+
       validerButton.style.setProperty(
         "background-color",
         "#1d6154",
